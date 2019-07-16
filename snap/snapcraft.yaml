@@ -1,0 +1,107 @@
+name: waterfox # you probably want to 'snapcraft register <name>'
+base: core18 # the base snap is the execution environment for this snap
+version: '56.2.12' # just for humans, typically '1.2+git' or '1.3.2'
+summary: Single-line elevator pitch for your amazing snap # 79 char long summary
+description: |
+  This is my-snap's description. You have a paragraph or two to tell the
+  most important story about your snap. Keep it under 100 words though,
+  we live in tweetspace and your description wants to look good in the snap
+  store.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+parts:
+  desktop-gtk:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    # make-parameters: ["FLAVOR=gtk2"]
+    build-packages:
+      - libgtk2.0-dev
+      - libgtk-3-dev
+    stage-packages:
+      - libxkbcommon0  # XKB_CONFIG_ROOT
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgtk2.0-0
+      - libgtk-3-0
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-bin
+      - libgtk2.0-bin
+      - libgtk-3-bin
+      - unity-gtk2-module
+      - unity-gtk3-module
+      - libappindicator3-1
+      - locales-all
+      - xdg-user-dirs
+      - ibus-gtk
+      - ibus-gtk3
+      - libibus-1.0-5
+    organize:
+      usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-2.0: usr/lib/gtk-2.0
+      usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-3.0: usr/lib/gtk-3.0
+  waterfox:
+    # See 'snapcraft plugins'
+    plugin: dump
+    source: https://storage-waterfox.netdna-ssl.com/releases/linux64/installer/waterfox-$SNAPCRAFT_PROJECT_VERSION.en-US.linux-x86_64.tar.bz2
+    after:
+      - desktop-gtk
+    stage-packages:
+      -  libfreetype6
+      -  libpng16-16
+      -  libfontconfig1
+      -  libxrender1
+      -  libasound2
+      -  libdbus-glib-1-2
+      -  libx11-xcb1
+      -  libxt6
+      -  libgdk-pixbuf2.0-0
+      -  libglib2.0-bin
+      -  locales-all
+      -  libgconf-2-4
+      -  libpulse0
+      
+plugs:
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/share/themes
+    default-provider: gtk-common-themes:gtk-3-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/share/sounds
+    default-provider: gtk-common-themes:sounds-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/share/icons
+    default-provider: gtk-common-themes:icon-themes
+apps:
+  waterfox:
+    command: desktop-launch $SNAP/waterfox
+    plugs:
+      - alsa
+      - avahi-observe
+      - cups-control
+      - desktop
+      - camera
+      - mount-observe
+      - pulseaudio
+      - desktop-legacy
+      - gsettings
+      - home
+      - network
+      - opengl
+      - removable-media
+      - unity7
+      - wayland
+      - x11
+      - browser-support
+      - screen-inhibit-control
+      - network-observe
+      - gtk-3-themes
+      - sound-themes
+      - icon-themes
