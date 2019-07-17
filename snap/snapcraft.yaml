@@ -52,20 +52,22 @@ parts:
     after:
       - desktop-gtk
     stage-packages:
-      -  libfreetype6
-      -  libpng16-16
-      -  libfontconfig1
-      -  libxrender1
-      -  libasound2
-      -  libdbus-glib-1-2
-      -  libx11-xcb1
-      -  libxt6
-      -  libgdk-pixbuf2.0-0
-      -  libglib2.0-bin
-      -  locales-all
-      -  libgconf-2-4
-      -  libpulse0
-      
+      - libpulse0
+      - libfreetype6
+      - libasound2
+      - libdbus-glib-1-2
+      - libpng16-16
+      - libfontconfig1
+      - libxrender1
+      - libx11-xcb1
+      - libxt6
+      - libgconf-2-4
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-bin
+      - locales-all
+      - libstartup-notification0
+      - libdbusmenu-glib4
+      - libdbusmenu-gtk3-4
 plugs:
   gtk-3-themes:
     interface: content
