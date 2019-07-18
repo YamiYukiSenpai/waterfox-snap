@@ -84,8 +84,10 @@ plugs:
 apps:
   waterfox:
     command: desktop-launch $SNAP/waterfox
+    environment:
+      DISABLE_WAYLAND: 1
+      HOME: $SNAP_USER_COMMON
     plugs:
-      - alsa
       - avahi-observe
       - cups-control
       - desktop
@@ -99,7 +101,6 @@ apps:
       - opengl
       - removable-media
       - unity7
-      - wayland
       - x11
       - browser-support
       - screen-inhibit-control
