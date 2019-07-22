@@ -9,7 +9,7 @@ description: |
   store.
 
 grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 parts:
   desktop-gtk:
@@ -68,6 +68,9 @@ parts:
       - libstartup-notification0
       - libdbusmenu-glib4
       - libdbusmenu-gtk3-4
+      #- xdg-desktop-portal
+      #- xdg-desktop-portal-gtk
+      #- xdg-desktop-portal-kde
 plugs:
   gtk-3-themes:
     interface: content
@@ -87,6 +90,7 @@ apps:
     environment:
       DISABLE_WAYLAND: 1
       HOME: $SNAP_USER_COMMON
+      #GTK_USE_PORTAL: 1
     plugs:
       - avahi-observe
       - cups-control
