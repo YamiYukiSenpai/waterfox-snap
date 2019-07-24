@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://avatars1.githubusercontent.com/u/29598503?v=3&s=256" alt="Waterfox">
+  <img src="waterfox.png" alt="Waterfox">
   <br />
   Waterfox
 </h1>
@@ -43,10 +43,10 @@ upstream so Waterfox can authoritatively publish future releases.
 
   - [x] Fork the [Snapcrafters template](https://github.com/snapcrafters/fork-and-rename-me) repository to your own GitHub account.
     - If you have already forked the Snapcrafter template to your account and want to create another snap, you'll need to use GitHub's [Import repository](https://github.com/new/import) feature because you can only fork a repository once.
-  - [ ] Rename the forked Snapcrafters template repository
-  - [ ] Update the description of the repository
+  - [x] Rename the forked Snapcrafters template repository
+  - [x] Update the description of the repository
   - [ ] Update logos and references to `Waterfox` and `[waterfox-snap]`
-  - [ ] Create a snap that runs in `devmode`
+  - [x] Create a snap that runs in `devmode`
   - [ ] Register the snap in the store, **using the preferred upstream name**
   - [ ] Add a screenshot to this `README.md`
   - [ ] Publish the `devmode` snap in the Snap store edge channel
