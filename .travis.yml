@@ -2,6 +2,6 @@ dist: xenial
 
 deploy:
   provider: snap
-  snap: *.snap
+  snap: waterfox_*.snap
   channel: edge
   skip_cleanup: true
