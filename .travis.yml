@@ -1,0 +1,7 @@
+dist: xenial
+
+deploy:
+  provider: snap
+  snap: *.snap
+  channel: edge
+  skip_cleanup: true
