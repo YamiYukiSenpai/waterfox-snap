@@ -1,0 +1,26 @@
+[Desktop Entry]
+Name=Waterfox Browser
+Icon=${SNAP}/meta/gui/waterfox.png
+Actions=NewWindow;NewPrivateWindow;ProfileManager;NewInstance;
+Exec=waterfox-snap.waterfox %U
+Type=Application;GTK;WebBrowser;
+Comment=Firefox-based browser
+MimeType=video/webm;text/html;image/png;image/jpeg;image/gif;application/xml;application/xml;application/xhtml+xml;application/x-xpinstall;application/rss+xml;application/rdf+xml;
+Terminal=false
+StartupNotify=true
+
+[Desktop Action NewWindow]
+Name=Open a New Window
+Exec=waterfox-snap.waterfox --new-window %U
+
+[Desktop Action NewPrivateWindow]
+Name=Open a Private Window
+Exec=waterfox-snap.waterfox --private-window %U
+
+[Desktop Action ProfileManager]
+Name=Open Profile Manager
+Exec=waterfox-snap.waterfox --ProfileManager
+
+[Desktop Action NewInstance]
+Name=Open a New Instance
+Exec=waterfox-snap.waterfox --new-instance
