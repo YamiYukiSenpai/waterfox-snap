@@ -93,7 +93,6 @@ plugs:
 apps:
   waterfox:
     command: desktop-launch $SNAP/waterfox
-    desktop: $SNAP/meta/gui/waterfox-snap_waterfox.desktop
     environment:
       DISABLE_WAYLAND: 1
       HOME: $SNAP_USER_COMMON
