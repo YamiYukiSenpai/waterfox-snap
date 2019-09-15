@@ -6,7 +6,7 @@
 
 [![Snap Status](https://build.snapcraft.io/badge/YamiYukiSenpai/waterfox-snap.svg)](https://build.snapcraft.io/user/YamiYukiSenpai/waterfox-snap)
 
-<p align="center"><b>This is the snap for Waterfox</b>, <i>“Single-line elevator pitch for your amazing snap”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
+<p align="center"><b>This is the snap for Waterfox</b>, <i>“Browse the web YOUR way”</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
 distributions.</p>
 
 <!-- Uncomment and modify this when you are provided a build status badge
@@ -45,9 +45,9 @@ upstream so Waterfox can authoritatively publish future releases.
     - If you have already forked the Snapcrafter template to your account and want to create another snap, you'll need to use GitHub's [Import repository](https://github.com/new/import) feature because you can only fork a repository once.
   - [x] Rename the forked Snapcrafters template repository
   - [x] Update the description of the repository
-  - [ ] Update logos and references to `Waterfox` and `[waterfox-snap]`
+  - [x] Update logos and references to `Waterfox` and `[waterfox-snap]`
   - [x] Create a snap that runs in `devmode`
-  - [ ] Register the snap in the store, **using the preferred upstream name**
+  - [x] Register the snap in the store, **using the preferred upstream name**
   - [ ] Add a screenshot to this `README.md`
   - [ ] Publish the `devmode` snap in the Snap store edge channel
   - [ ] Add install instructions to this `README.md`
