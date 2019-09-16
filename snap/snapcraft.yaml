@@ -59,24 +59,31 @@ parts:
       - desktop-gtk
     stage-packages:
       - libpulse0
-      - libfreetype6
       - libasound2
       - libdbus-glib-1-2
       - libpng16-16
-      - libfontconfig1
       - libxrender1
       - libx11-xcb1
       - libxt6
-      - libgconf-2-4
-      - libgdk-pixbuf2.0-0
       - libglib2.0-bin
       - locales-all
-      - libstartup-notification0
       - libdbusmenu-glib4
       - libdbusmenu-gtk3-4
+      - libcurl3-gnutls
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libmirclient9
+      - desktop-file-utils
+      - ffmpeg
+      - libc-bin
+      #- libgdk-pixbuf2.0-0
+      #- libstartup-notification0
+      #- libfreetype6
+      #- libfontconfig1
       #- xdg-desktop-portal
       #- xdg-desktop-portal-gtk
       #- xdg-desktop-portal-kde
+
 plugs:
   gtk-3-themes:
     interface: content
@@ -90,6 +97,10 @@ plugs:
     interface: content
     target: $SNAP/share/icons
     default-provider: gtk-common-themes:icon-themes
+  browser-sandbox:
+    interface: browser-support
+    allow-sandbox: true
+
 apps:
   waterfox:
     command: desktop-launch $SNAP/waterfox
