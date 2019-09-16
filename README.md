@@ -23,7 +23,7 @@ distributions.</p>
 
 ## Install
 
-    sudo snap install waterfox-snap
+    sudo snap install --edge waterfox-snap
 
 <!-- Uncomment and modify this when your snap is available on the store
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/waterfox-snap)
