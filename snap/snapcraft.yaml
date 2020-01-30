@@ -48,6 +48,7 @@ parts:
       - ibus-gtk
       - ibus-gtk3
       - libibus-1.0-5
+      - libc6
     organize:
       usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-2.0: usr/lib/gtk-2.0
       usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-3.0: usr/lib/gtk-3.0
