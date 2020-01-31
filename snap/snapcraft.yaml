@@ -78,6 +78,7 @@ parts:
       - ffmpeg
       - libc-bin
       - libc6
+      - libnspr4
       #- libgdk-pixbuf2.0-0
       #- libstartup-notification0
       #- libfreetype6
