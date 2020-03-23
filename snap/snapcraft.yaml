@@ -11,7 +11,7 @@ description: |
   to Mozilla or the Waterfox project.
 
 grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 architectures:
   - build-on: amd64
@@ -22,7 +22,6 @@ parts:
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: gtk
     plugin: make
-    # make-parameters: ["FLAVOR=gtk2"]
     build-packages:
       - libgtk2.0-dev
       - libgtk-3-dev
@@ -49,9 +48,7 @@ parts:
       - ibus-gtk3
       - libibus-1.0-5
       - libc6
-    organize:
-      staging-files/usr: usr/
-      staging-files/bin: bin/
+      - libnotify4
     organize:
       usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-2.0: usr/lib/gtk-2.0
       usr/lib/$SNAPCRAFT_ARCH_TRIPLET/gtk-3.0: usr/lib/gtk-3.0
@@ -62,12 +59,14 @@ parts:
     after:
       - desktop-gtk
     build-packages:
+      - build-essential
+      - bash
       - clang
       - libssl-dev
       - autoconf2.13
       - rustc
       - cargo
-      #- libgtk-2-dev
+      - libgtk2.0-dev
       - libgtk-3-dev
       - libgconf2-dev
       - libdbus-glib-1-dev
@@ -75,8 +74,8 @@ parts:
       - libdbusmenu-glib-dev
       - libpulse-dev
       - yasm
+      - python2.7
       - python3
-      - python
       - libasound2-dev
       - libc6-dev
       - libc-dev-bin
@@ -85,7 +84,11 @@ parts:
       - unzip
       - zip
       - libxt-dev
-    override-build: PATH="$META/root/.cargo/bin:$PATH" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/build_waterfox.sh
+      - libnotify-dev
+    override-build: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $META/root/project/override.sh build
+    organize:
+      staging-files/usr: usr/
+      staging-files/bin: bin/
     stage-packages:
       - libpulse0
       - libasound2
@@ -105,15 +108,32 @@ parts:
       - desktop-file-utils
       - ffmpeg
       - libc-bin
-      - libc6
+      #- libc6
       - libnspr4
+      - libglu1-mesa
+      - freeglut3
+      - libslang2
+      - libnotify4
+      - x11-common
+      - unity-gtk2-module
+      - unity-gtk3-module
+      - libgpm2
+      #- shared-mime-info
+      - libgtk2.0-0
+      - libgtk-3-0
+      #- libgdk-pixbuf2.0-0
+      #- libglib2.0-bin
+      #- libgtk2.0-bin
+      #- libgtk-3-bin
       #- libgdk-pixbuf2.0-0
       #- libstartup-notification0
       #- libfreetype6
       #- libfontconfig1
-      #- xdg-desktop-portal
-      #- xdg-desktop-portal-gtk
-      #- xdg-desktop-portal-kde
+      - xdg-desktop-portal
+      - xdg-desktop-portal-gtk
+      - xdg-desktop-portal-kde
+    override-stage: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh stage
+    override-prime: SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh prime
 
 plugs:
   gtk-3-themes:
@@ -128,13 +148,27 @@ plugs:
     interface: content
     target: $SNAP/share/icons
     default-provider: gtk-common-themes:icon-themes
+  gnome-3-28-1804:
+    interface: content
+    target: $SNAP/gnome-platform
   #browser-sandbox:
     #interface: browser-support
     #allow-sandbox: true
 
+slots:
+  dbus-daemon:
+    interface: dbus
+    bus: session
+    name: net.waterfox.waterfox
+
+environment:
+  SNAP_DESKTOP_RUNTIME: $SNAP/gnome-platform
+    
 apps:
   waterfox:
-    command: desktop-launch $SNAP/waterfox
+    command: desktop-launch $SNAP/usr/lib/waterfox/waterfox
+    command-chain:
+      - snap/command-chain/snapcraft-runner
     environment:
       DISABLE_WAYLAND: 1
       HOME: $SNAP_USER_COMMON
@@ -160,3 +194,14 @@ apps:
       - gtk-3-themes
       - sound-themes
       - icon-themes
+    slots:
+      - dbus-daemon
+
+layout:
+  /usr/bin/gjs:
+    symlink: $SNAP/gnome-platform/usr/bin/gjs
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0:
+    bind: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/webkit2gtk-4.0
+  /usr/share/xml/iso-codes:
+    bind: $SNAP/gnome-platform/usr/share/xml/iso-codes
+  /usr/share/
