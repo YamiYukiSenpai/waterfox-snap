@@ -85,7 +85,11 @@ parts:
       - zip
       - libxt-dev
       - libnotify-dev
-    override-build: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $META/root/project/override.sh build
+    #override-build: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $META/root/project/override.sh build
+    override-build: |
+      cargo install cbindgen
+      cargo install sccache
+      ./mach build
     organize:
       staging-files/usr: usr/
       staging-files/bin: bin/
@@ -132,8 +136,19 @@ parts:
       - xdg-desktop-portal
       - xdg-desktop-portal-gtk
       - xdg-desktop-portal-kde
-    override-stage: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh stage
-    override-prime: SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh prime
+    #override-stage: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh stage
+    override-stage: |
+      /root/parts/waterfox/build/mach install
+      cp -r /root/parts/waterfox/install/* /root/stage
+      mkdir -p /root/stage/usr/lib/waterfox
+      cp -r /usr/local/lib/waterfox /root/stage/usr/lib/
+      ln -sf /root/stage/usr/lib/waterfox/waterfox /root/stage/usr/bin/waterfox
+      snapcraftctl stage
+    #override-prime: SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh prime
+    override-prime: |
+      cp -r /usr/local/lib/waterfox /root/prime/usr/lib/
+      ln -sf /root/prime/usr/lib/waterfox/waterfox /root/prime/usr/bin/waterfox
+      snapcraftctl prime
 
 plugs:
   gtk-3-themes:
