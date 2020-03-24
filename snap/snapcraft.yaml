@@ -89,7 +89,7 @@ parts:
     override-build: |
       cargo install cbindgen
       cargo install sccache
-      ./mach build
+      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" ./mach build
     organize:
       staging-files/usr: usr/
       staging-files/bin: bin/
@@ -138,7 +138,7 @@ parts:
       - xdg-desktop-portal-kde
     #override-stage: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh stage
     override-stage: |
-      /root/parts/waterfox/build/mach install
+      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" /root/parts/waterfox/build/mach install
       cp -r /root/parts/waterfox/install/* /root/stage
       mkdir -p /root/stage/usr/lib/waterfox
       cp -r /usr/local/lib/waterfox /root/stage/usr/lib/
