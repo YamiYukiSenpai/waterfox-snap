@@ -96,9 +96,10 @@ parts:
       pwd
       #  find / -type d -name waterfox
       echo $META
+      echo $SNAPCRAFT_PART_SRC
       cargo install --force cbindgen
       cargo install --force sccache
-      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" ./mach build
+      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $SNAPCRAFT_PART_SRC/mach build
       cp -r $SNAPCRAFT_PART_SRC $SNAPCRAFT_STAGE/
       #  find / -type d -name waterfox
       pwd
