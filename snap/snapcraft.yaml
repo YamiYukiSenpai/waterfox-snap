@@ -101,6 +101,9 @@ parts:
       cargo install --force sccache
       PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $SNAPCRAFT_PART_SRC/mach build
       cp -r $SNAPCRAFT_PART_SRC $SNAPCRAFT_STAGE/
+      echo $SNAPCRAFT_PART_SRC
+      echo $SNAPCRAFT_PART_BUILD
+      echo $SNAPCRAFT_PART_INSTALL
       #  find / -type d -name waterfox
       pwd
     organize:
@@ -163,7 +166,8 @@ parts:
     override-stage: |
       pwd
       #  find / -type d -name waterfox
-      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $SNAPCRAFT_STAGE/waterfox/build/mach install
+      ls -l $SNAPCRAFT_PART_BUILD
+      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $SNAPCRAFT_PART_BUILD/mach install
       mkdir -p $SNAPCRAFT_STAGE/usr/lib/waterfox
       cp -r /usr/local/lib/waterfox $SNAPCRAFT_STAGE/usr/lib/
       pwd
