@@ -87,9 +87,10 @@ parts:
       - libnotify-dev
     #override-build: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $META/root/project/override.sh build
     override-build: |
-      cargo install cbindgen
-      cargo install sccache
+      cargo install --force cbindgen
+      cargo install --force sccache
       PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" ./mach build
+      cp -r /root/parts/waterfox $META/root/stage/
     organize:
       staging-files/usr: usr/
       staging-files/bin: bin/
@@ -138,8 +139,8 @@ parts:
       - xdg-desktop-portal-kde
     #override-stage: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh stage
     override-stage: |
-      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" /root/parts/waterfox/build/mach install
-      cp -r /root/parts/waterfox/install/* /root/stage
+      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" /root/stage/waterfox/build/mach install
+      cp -r /root/stage/waterfox/install/* /root/stage
       mkdir -p /root/stage/usr/lib/waterfox
       cp -r /usr/local/lib/waterfox /root/stage/usr/lib/
       ln -sf /root/stage/usr/lib/waterfox/waterfox /root/stage/usr/bin/waterfox
