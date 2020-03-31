@@ -87,6 +87,7 @@ parts:
       - libnotify-dev
     #override-build: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $META/root/project/override.sh build
     override-build: |
+      pwd
       cargo install --force cbindgen
       cargo install --force sccache
       PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" ./mach build
