@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="waterfox-classic.png" alt="Waterfox Classic">
   <br />
-  Waterfox
+  Waterfox Classic
 </h1>
 
 [![Snap Status](https://build.snapcraft.io/badge/YamiYukiSenpai/waterfox-snap.svg)](https://build.snapcraft.io/user/YamiYukiSenpai/waterfox-snap)
