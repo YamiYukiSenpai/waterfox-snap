@@ -1,4 +1,4 @@
-name: waterfox-snap # you probably want to 'snapcraft register <name>'
+name: waterfox-classic # you probably want to 'snapcraft register <name>'
 base: core18 # the base snap is the execution environment for this snap
 version: '2020.03.1' # just for humans, typically '1.2+git' or '1.3.2'
 summary: Browse the web YOUR way # 79 char long summary
@@ -9,7 +9,6 @@ description: |
   extensions you like (including bootstrapped add-ons that can completely change 
   functionality of the browser) and absolutely no data or telemetry is sent back
   to Mozilla or the Waterfox project.
-
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 
@@ -86,10 +85,26 @@ parts:
       - libxt-dev
       - libnotify-dev
     #override-build: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $META/root/project/override.sh build
+    #override-build: |
+      #pwd
+      #cargo install --force cbindgen
+      #cargo install --force sccache
+      #PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" ./mach build
+      #cp -r /root/parts/waterfox $META/root/stage/
     override-build: |
-      cargo install cbindgen
-      cargo install sccache
-      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" ./mach build
+      pwd
+      #  find / -type d -name waterfox
+      echo $META
+      echo $SNAPCRAFT_PART_SRC
+      cargo install --force cbindgen
+      cargo install --force sccache
+      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $SNAPCRAFT_PART_SRC/mach build
+      cp -r $SNAPCRAFT_PART_SRC $SNAPCRAFT_STAGE/
+      echo $SNAPCRAFT_PART_SRC
+      echo $SNAPCRAFT_PART_BUILD
+      echo $SNAPCRAFT_PART_INSTALL
+      #  find / -type d -name waterfox
+      pwd
     organize:
       staging-files/usr: usr/
       staging-files/bin: bin/
@@ -137,19 +152,41 @@ parts:
       - xdg-desktop-portal-gtk
       - xdg-desktop-portal-kde
     #override-stage: PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh stage
+    #override-stage: |
+      #pwd
+      #PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" /root/stage/waterfox/build/mach install
+      #cp -r /root/stage/waterfox/install/* /root/stage
+      #mkdir -p /root/stage/usr/lib/waterfox
+      #cp -r /usr/local/lib/waterfox /root/stage/usr/lib/
+      #ln -sf /root/stage/usr/lib/waterfox/waterfox /root/stage/usr/bin/waterfox
+      #pwd
+      #snapcraftctl stage
+      #pwd
     override-stage: |
-      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $META/root/parts/waterfox/build/mach install
-      cp -r /root/parts/waterfox/install/* /root/stage
-      mkdir -p /root/stage/usr/lib/waterfox
-      cp -r /usr/local/lib/waterfox /root/stage/usr/lib/
-      ln -sf /root/stage/usr/lib/waterfox/waterfox /root/stage/usr/bin/waterfox
+      pwd
+      #  find / -type d -name waterfox
+      ls -l $SNAPCRAFT_PART_BUILD
+      PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $SNAPCRAFT_PART_BUILD/mach install
+      mkdir -p $SNAPCRAFT_STAGE/usr/lib/waterfox
+      cp -r /usr/local/lib/waterfox $SNAPCRAFT_STAGE/usr/lib/
+      pwd
       snapcraftctl stage
+      #  find / -type d -name waterfox
+      pwd
     #override-prime: SHELL="/bin/bash" SNAPCRAFT_PROJECT_VERSION=$SNAPCRAFT_PROJECT_VERSION $META/root/project/override.sh prime
+    #override-prime: |
+      #pwd
+      #cp -r /usr/local/lib/waterfox /root/prime/usr/lib/
+      #ln -sf /root/prime/usr/lib/waterfox/waterfox /root/prime/usr/bin/waterfox
+      #snapcraftctl prime
     override-prime: |
-      cp -r /usr/local/lib/waterfox /root/prime/usr/lib/
-      ln -sf /root/prime/usr/lib/waterfox/waterfox /root/prime/usr/bin/waterfox
+      pwd
+      #  find / -type d -name waterfox
+      cp -r /usr/local/lib/waterfox $SNAPCRAFT_PRIME/usr/lib/
       snapcraftctl prime
-
+      #  find / -type d -name waterfox
+      pwd
+      
 plugs:
   gtk-3-themes:
     interface: content
@@ -180,7 +217,7 @@ environment:
   SNAP_DESKTOP_RUNTIME: $SNAP/gnome-platform
     
 apps:
-  waterfox:
+  waterfox-classic:
     command: desktop-launch $SNAP/usr/lib/waterfox/waterfox
     command-chain:
       - snap/command-chain/snapcraft-runner
