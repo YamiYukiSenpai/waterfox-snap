@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Waterfox Browser
-Icon=${SNAP}/meta/gui/waterfox.png
+Icon=${SNAP}/meta/gui/waterfox-classic.png
 Actions=NewWindow;NewPrivateWindow;ProfileManager;NewInstance;
 Exec=waterfox-classic %U
 Type=Application

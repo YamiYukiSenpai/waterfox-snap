@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="waterfox.png" alt="Waterfox">
+  <img src="waterfox-classic.png" alt="Waterfox Classic">
   <br />
   Waterfox
 </h1>
