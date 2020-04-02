@@ -10,7 +10,7 @@ description: |
   functionality of the browser) and absolutely no data or telemetry is sent back
   to Mozilla or the Waterfox project.
 grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
+confinement: devmode # use 'strict' once you have the right plugs and slots
 
 architectures:
   - build-on: amd64
