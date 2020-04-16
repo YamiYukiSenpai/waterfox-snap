@@ -191,6 +191,7 @@ environment:
 apps:
   waterfox-classic:
     command: desktop-launch $SNAP/usr/lib/waterfox/waterfox
+    extensions: [gnome-3-28]
     command-chain:
       - snap/command-chain/snapcraft-runner
     environment:
