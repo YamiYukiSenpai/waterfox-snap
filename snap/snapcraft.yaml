@@ -206,6 +206,7 @@ apps:
       - camera
       - mount-observe
       - pulseaudio
+      - audio-playback
       - desktop-legacy
       - gsettings
       - home
