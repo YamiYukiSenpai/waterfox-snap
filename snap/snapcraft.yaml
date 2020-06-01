@@ -170,7 +170,7 @@ apps:
       - removable-media
       - unity7
       - x11
-      #- browser-support
+      - browser-support
       - screen-inhibit-control
       - network-observe
       - gtk-3-themes
