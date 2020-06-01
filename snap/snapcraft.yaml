@@ -131,9 +131,9 @@ plugs:
   gnome-3-28-1804:
     interface: content
     target: $SNAP/gnome-platform
-  browser-sandbox:
-    interface: browser-support
-    allow-sandbox: true
+  #browser-sandbox:
+    #interface: browser-support
+    #allow-sandbox: true
 
 slots:
   dbus-daemon:
