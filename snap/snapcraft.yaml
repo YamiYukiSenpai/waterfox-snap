@@ -143,6 +143,7 @@ slots:
 
 environment:
   SNAP_DESKTOP_RUNTIME: $SNAP/gnome-platform
+  GTK_USE_PORTALS: 1
     
 apps:
   waterfox-classic:
