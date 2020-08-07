@@ -50,15 +50,10 @@ parts:
       - libnotify-dev
     override-build: |
       pwd
-      echo $META
-      echo $SNAPCRAFT_PART_SRC
       cargo install --force cbindgen
       cargo install --force sccache
       PATH="$META/root/.cargo/bin:$PATH" SHELL="/bin/bash" $SNAPCRAFT_PART_SRC/mach build
       cp -r $SNAPCRAFT_PART_SRC $SNAPCRAFT_STAGE/
-      echo $SNAPCRAFT_PART_SRC
-      echo $SNAPCRAFT_PART_BUILD
-      echo $SNAPCRAFT_PART_INSTALL
       pwd
     organize:
       staging-files/usr: usr/
