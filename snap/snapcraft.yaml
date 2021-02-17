@@ -147,9 +147,8 @@ apps:
     command-chain:
       - snap/command-chain/snapcraft-runner
     environment:
-      DISABLE_WAYLAND: 1
+      MOZ_ENABLE_WAYLAND: 1
       HOME: $SNAP_USER_COMMON
-      #GTK_USE_PORTAL: 1
     plugs:
       - avahi-observe
       - cups-control
@@ -172,6 +171,7 @@ apps:
       - gtk-3-themes
       - sound-themes
       - icon-themes
+      - wayland
     slots:
       - dbus-daemon
 
