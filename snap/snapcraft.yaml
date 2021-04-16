@@ -32,6 +32,8 @@ parts:
     # See 'snapcraft plugins'
     plugin: dump
     source: https://github.com/MrAlex94/Waterfox/archive/$SNAPCRAFT_PROJECT_VERSION-classic.tar.gz
+    after:
+      - nasm
     build-packages:
       - build-essential
       - bash
