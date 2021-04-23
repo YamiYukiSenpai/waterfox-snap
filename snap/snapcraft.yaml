@@ -29,7 +29,7 @@ parts:
   waterfox:
     # See 'snapcraft plugins'
     plugin: dump
-    source: https://github.com/MrAlex94/Waterfox/archive/$SNAPCRAFT_PROJECT_VERSION-classic.tar.gz
+    source: https://github.com/MrAlex94/Waterfox/archive/$SNAPCRAFT_PROJECT_VERSION.tar.gz # double check if source file has "-classic" 
     after:
       - nasm
     build-packages:
