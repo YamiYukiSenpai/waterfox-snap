@@ -22,7 +22,7 @@ parts:
       - wget
       - dpkg
     override-pull: |
-      wget http://mirrors.kernel.org/ubuntu/pool/universe/n/nasm/nasm_2.14.02-1_amd64.deb
+      wget http://mirrors.kernel.org/ubuntu/pool/universe/n/nasm/nasm_2.15.05-1_amd64.deb
       dpkg -i nasm_*.deb
     plugin: nil
     prime: [ -* ]
@@ -59,6 +59,7 @@ parts:
       - zip
       - libxt-dev
       - libnotify-dev
+      - nasm-mozilla
     override-build: |
       pwd
       cargo install --force cbindgen
